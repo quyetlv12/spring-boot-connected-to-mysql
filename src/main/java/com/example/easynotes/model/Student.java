@@ -17,16 +17,23 @@ public class Student {
     @Column(name = "name")
     private String name;
 
+    @Column(name="age")
+    private int age;
+
     @Column(name = "address")
     private String address;
 
+  
+
     public Student() {
+        
     }
 
-    public Student(long id, String name, String address) {
+    public Student(long id, String name, String address , int age) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.age = age;
     }
 
     public long getId() {
@@ -40,6 +47,9 @@ public class Student {
     public String getName() {
         return name;
     }
+    public int getAge() {
+        return age;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -51,6 +61,9 @@ public class Student {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    public void setAge(int age) {
+        this.age = age;
     }
 
 }

@@ -13,16 +13,16 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
     @Override
     public Student addStudent(Student student){
-        if (student != null) {
-            return studentRepository.save(student);
-        }
-        return null;
+        return studentRepository.save(student);
     }
     public Student updateStudent(long id , Student student){
         if (student != null) {
             Student findStudent = studentRepository.getById(id);
             if (findStudent != null) {
                 findStudent.setName(student.getName());
+                findStudent.setAge(student.getAge());
+                findStudent.setAddress(student.getAddress());
+
                 return studentRepository.save(findStudent);
             }            
         }
