@@ -3,17 +3,16 @@ package com.example.easynotes.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.easynotes.model.Student;
 import com.example.easynotes.service.StudentService;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -22,12 +21,12 @@ public class StudentController {
     private StudentService studentServices;
 
     @PostMapping("/add-student")
-    public Student addStudent(@RequestBody Student student) {
-        return studentServices.addStudent(student);
+    public ResponseEntity<Object> addStudent(@RequestBody Student student) {
+        return  studentServices.addStudent(student);
     }
 
     @PutMapping("/student/edit/{id}")
-    public Student editStudent(@PathVariable("id") long id, @RequestBody Student student) {
+    public ResponseEntity<String> editStudent(@PathVariable("id") long id, @RequestBody Student student) {
         return studentServices.updateStudent(id, student);
     }
 
@@ -46,4 +45,14 @@ public class StudentController {
     public Student getOneStudent(@PathVariable("id") long id) {
         return studentServices.getStudent(id);
     }
+    @PostMapping("/student/clear")
+    public ResponseEntity<String> clearStudents(){
+        return studentServices.ClearAllStudents();
+    }
+
+    @GetMapping("/student-filter")
+    public List filterStudentByName(@RequestParam(value = "name" , required = false) String name){
+        return studentServices.filterStudent(name);
+    }
+
 }

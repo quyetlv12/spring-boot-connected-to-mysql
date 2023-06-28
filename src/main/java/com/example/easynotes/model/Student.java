@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "student")
+@Table(name = "students")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,17 +23,20 @@ public class Student {
     @Column(name = "address")
     private String address;
 
+    @Column(name = "email")
+    private String email;
   
 
     public Student() {
         
     }
 
-    public Student(long id, String name, String address , int age) {
+    public Student(long id, String name, String address , int age , String email) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.age = age;
+        this.email = email;
     }
 
     public long getId() {
@@ -64,6 +67,14 @@ public class Student {
     }
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }
